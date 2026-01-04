@@ -1,9 +1,5 @@
 import { useEffect, useState } from 'react';
-
-type JokeData = {
-  category: string;
-  joke: string;
-};
+import type { JokeData } from '../types/jokedata';
 
 function useFetch(url: string) {
   const [loading, setLoading] = useState(true);
