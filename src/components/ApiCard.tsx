@@ -1,43 +1,35 @@
 import { ProgressCircle, Text } from '@chakra-ui/react';
 import { Card } from '@chakra-ui/react';
 import useFetch from '../hooks/useFetch';
-import type { JokeData } from '../types/jokedata';
 
 export default function ApiCard() {
   const { loading, error, data } = useFetch(
     'https://v2.jokeapi.dev/joke/Any?type=single'
   );
 
-  if (loading) return <LoadingIndicator />;
-  if (!data) return <ErrorState message={error} />;
+  if (loading)
+    return <CardLayout title="Loading" children={<LoadingIndicator />} />;
+  if (!data)
+    return <CardLayout title="Error" children={<Text>{error}</Text>} />;
 
-  return <SuccessState data={data} />;
-}
-
-function ErrorState({ message }: { message: string }) {
   return (
-    <>
-      <Card.Root>
-        <Card.Header>
-          <Text>Error</Text>
-        </Card.Header>
-        <Card.Body>
-          <Text>{message}</Text>
-        </Card.Body>
-      </Card.Root>
-    </>
+    <CardLayout title={data.category} children={<Text>{data.joke}</Text>} />
   );
 }
 
-function SuccessState({ data }: { data: JokeData }) {
+function CardLayout({
+  title,
+  children,
+}: {
+  title: string;
+  children: React.ReactNode;
+}) {
   return (
     <Card.Root size="md" flex={3} margin={8}>
       <Card.Header>
-        <Text>{data.category}</Text>
+        <Text>{title}</Text>
       </Card.Header>
-      <Card.Body>
-        <Text>{data.joke}</Text>
-      </Card.Body>
+      <Card.Body>{children}</Card.Body>
     </Card.Root>
   );
 }
