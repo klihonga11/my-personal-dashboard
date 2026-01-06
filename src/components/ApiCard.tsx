@@ -14,11 +14,7 @@ export default function ApiCard() {
   return <SuccessState data={data} />;
 }
 
-type ErrorProps = {
-  message: string;
-};
-
-function ErrorState({ message }: ErrorProps) {
+function ErrorState({ message }: { message: string }) {
   return (
     <>
       <Card.Root>
@@ -33,11 +29,7 @@ function ErrorState({ message }: ErrorProps) {
   );
 }
 
-type SuccessProps = {
-  data: JokeData;
-};
-
-function SuccessState({ data }: SuccessProps) {
+function SuccessState({ data }: { data: JokeData }) {
   return (
     <Card.Root size="md" flex={3} margin={8}>
       <Card.Header>
