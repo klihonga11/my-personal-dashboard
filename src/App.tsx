@@ -1,14 +1,18 @@
+import { Route, Routes } from 'react-router-dom';
 import './App.css';
-import { Text } from '@chakra-ui/react';
-import Home from './pages/Home';
+import JokesPage from './pages/Jokes';
+import Pages from './layout/Pages';
+import WeatherPage from './pages/Weather';
+import WelcomePage from './pages/Welcome';
 
-function App() {
+export default function App() {
   return (
-    <>
-      <Text>My Personal Dashboard</Text>
-      <Home></Home>
-    </>
+    <Routes>
+      <Route element={<Pages />}>
+        <Route path="/" element={<WelcomePage />} />
+        <Route path="/jokes" element={<JokesPage />} />
+        <Route path="/weather" element={<WeatherPage />} />
+      </Route>
+    </Routes>
   );
 }
-
-export default App;
